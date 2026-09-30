@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerakan Pandu Hidayatullah - SMA Ar-Rohmah Putra</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gph: {
+                            DEFAULT: '#233686',
+                            dark: '#192868',
+                            light: '#3147a8',
+                            accent: '#f39c12',
+                            soft: '#f0f4ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #233686;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #192868;
+        }
+
+        /* Hero Carousel Animations */
+        .slide-fade {
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Custom Card Hover Effects */
+        .member-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .member-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px -10px rgba(35, 54, 134, 0.25);
+        }
+
+        /* Glassmorphism effects */
+        .glass-header {
+            background: rgba(35, 54, 134, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header text-white shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand Name -->
+                <a href="#beranda" class="flex items-center gap-3 group">
+                    <img src="https://github.com/virtueterna28/GPH/blob/main/gph.png?raw=true" 
+                         alt="Logo GPH" 
+                         class="h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
+                         onerror="this.src='https://placehold.co/100x100/233686/white?text=GPH'">
+                    <div class="flex flex-col">
+                        <span class="font-extrabold text-lg tracking-wide leading-tight group-hover:text-amber-300 transition-colors">GPH</span>
+                        <span class="text-xs text-blue-200 font-medium tracking-wider">SMA Ar-Rohmah Putra</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                    <a href="#beranda" class="hover:text-amber-300 transition-colors py-2 border-b-2 border-transparent hover:border-amber-300">Beranda</a>
+                    <a href="#tentang" class="hover:text-amber-300 transition-colors py-2 border-b-2 border-transparent hover:border-amber-300">Tentang Kami</a>
+                    <a href="#struktur" class="hover:text-amber-300 transition-colors py-2 border-b-2 border-transparent hover:border-amber-300">Struktur Pengurus</a>
+                    <a href="#kontak" class="hover:text-amber-300 transition-colors py-2 border-b-2 border-transparent hover:border-amber-300">Media Sosial</a>
+                </nav>
+
+                <!-- CTA Button Header -->
+                <div class="hidden md:block">
+                    <a href="https://www.instagram.com/gphsmaarrohmah/" target="_blank" rel="noopener" class="bg-amber-400 hover:bg-amber-300 text-gph-dark font-bold px-5 py-2.5 rounded-full shadow-md hover:shadow-xl transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-0.5">
+                        <i class="fab fa-instagram text-lg"></i>
+                        <span>Hubungi Kami</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-lg text-blue-100 hover:text-white hover:bg-white/10 focus:outline-none">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gph-dark border-t border-blue-900/50 px-4 pt-3 pb-6 space-y-3">
+            <a href="#beranda" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-800 hover:text-amber-300">Beranda</a>
+            <a href="#tentang" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-800 hover:text-amber-300">Tentang Kami</a>
+            <a href="#struktur" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-800 hover:text-amber-300">Struktur Pengurus</a>
+            <a href="#kontak" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-800 hover:text-amber-300">Media Sosial & Kontak</a>
+            <a href="https://www.instagram.com/gphsmaarrohmah/" target="_blank" rel="noopener" class="block w-full text-center bg-amber-400 hover:bg-amber-300 text-gph-dark font-bold px-4 py-2.5 rounded-xl shadow mt-2">
+                Hubungi Kami (Instagram)
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH SLIDER -->
+    <section id="beranda" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden pt-20">
+        <!-- Image Slider Containers -->
+        <div id="hero-slider" class="absolute inset-0 z-0">
+            <!-- Slide 1 -->
+            <div class="slide absolute inset-0 opacity-100 slide-fade bg-cover bg-center" style="background-image: url('https://github.com/virtueterna28/GPH/blob/main/foto/DSC04162.jpg?raw=true');"></div>
+            <!-- Slide 2 -->
+            <div class="slide absolute inset-0 opacity-0 slide-fade bg-cover bg-center" style="background-image: url('https://github.com/virtueterna28/GPH/blob/main/foto/DSC04143.jpg?raw=true');"></div>
+            <!-- Slide 3 -->
+            <div class="slide absolute inset-0 opacity-0 slide-fade bg-cover bg-center" style="background-image: url('https://github.com/virtueterna28/GPH/blob/main/foto/DSC04134.jpg?raw=true');"></div>
+        </div>
+
+        <!-- Overlay Dark Gradient for Contrast -->
+        <div class="absolute inset-0 bg-gradient-to-t from-gph-dark via-gph/70 to-black/60 z-10"></div>
+
+        <!-- Content Overlay -->
+        <div class="relative z-20 max-w-5xl mx-auto px-4 text-center text-white space-y-6">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-2">
+                <img src="https://github.com/virtueterna28/GPH/blob/main/gph.png?raw=true" alt="Mini Logo" class="h-5 w-auto" onerror="this.remove()">
+                <span class="text-xs font-semibold tracking-wider text-amber-300 uppercase">Organisasi Siswa Intra Sekolah</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none drop-shadow-md">
+                Gerakan Pandu <span class="text-amber-400">Hidayatullah</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-blue-100 font-light leading-relaxed">
+                Pemimpin Muda, Berani, Bertanggung Jawab, dan Berdampak Positif Bagi Pondok Pesantren Ar-Rohmah Putra Malang.
+            </p>
+
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#tentang" class="w-full sm:w-auto px-8 py-3.5 bg-amber-400 hover:bg-amber-300 text-gph-dark font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    Jelajahi GPH <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="https://www.instagram.com/gphsmaarrohmah/" target="_blank" rel="noopener" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl backdrop-blur-md border border-white/30 transition-all duration-300 text-center">
+                    Hubungi Kami
+                </a>
+            </div>
+        </div>
+
+        <!-- Carousel Indicators & Nav Buttons -->
+        <div class="absolute bottom-8 z-20 left-1/2 transform -translate-x-1/2 flex items-center gap-3">
+            <button onclick="setSlide(0)" class="dot-btn w-3 h-3 rounded-full bg-white transition-all duration-300 opacity-100" aria-label="Slide 1"></button>
+            <button onclick="setSlide(1)" class="dot-btn w-3 h-3 rounded-full bg-white/50 transition-all duration-300 opacity-50" aria-label="Slide 2"></button>
+            <button onclick="setSlide(2)" class="dot-btn w-3 h-3 rounded-full bg-white/50 transition-all duration-300 opacity-50" aria-label="Slide 3"></button>
+        </div>
+
+        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/30 hover:bg-black/50 text-white transition-all hidden sm:block">
+            <i class="fas fa-chevron-left text-xl"></i>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/30 hover:bg-black/50 text-white transition-all hidden sm:block">
+            <i class="fas fa-chevron-right text-xl"></i>
+        </button>
+    </section>
+
+    <!-- TENTANG GPH SECTION -->
+    <section id="tentang" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Text Info -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 text-gph font-bold tracking-wider uppercase text-xs bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100">
+                        <i class="fas fa-compass"></i> Filosofi & Visi
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Lebih Dari Sekadar Organisasi, GPH Adalah <span class="text-gph">Sebuah Gerakan</span>
+                    </h2>
+                    
+                    <div class="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed">
+                        <p class="first-letter:text-4xl first-letter:font-bold first-letter:text-gph first-letter:mr-2 first-letter:float-left">
+                            Bagi sebagian orang, organisasi kerap dipahami sebatas kumpulan individu yang berjalan di bawah satu atap dengan tujuan yang serupa. Namun, GPH memandang arti sebuah kebersamaan dengan cara yang jauh lebih luas dan dinamis. GPH bukan sekadar kelompok, melainkan sebuah gerakan.
+                        </p>
+                        <p>
+                            Sebagai sebuah gerakan, GPH hidup melalui energi yang terus bergerak, beradaptasi, dan berdampak. Di dalamnya terkumpul orang-orang yang tidak hanya menyamakan visi, tetapi juga memikul misi besar bersama: menghadirkan perubahan nyata dan berkelanjutan bagi SMA Ar Rohmah.
+                        </p>
+                        <p class="font-medium text-slate-800 bg-gph-soft p-4 rounded-xl border-l-4 border-gph italic">
+                            "Setiap langkah, gagasan, dan aksi yang lahir di dalam GPH dirancang untuk satu cita-cita utama—membawa SMA Ar Rohmah bertransformasi menjadi institusi yang jauh lebih unggul."
+                        </p>
+                    </div>
+
+                    <!-- Highlights Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                            <i class="fas fa-seedling text-2xl text-gph mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-sm">Bertransformasi</h4>
+                            <p class="text-xs text-slate-500">Inovasi Berkelanjutan</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                            <i class="fas fa-users-gear text-2xl text-gph mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-sm">Kolaboratif</h4>
+                            <p class="text-xs text-slate-500">Sinergi Pemimpin Muda</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-center col-span-2 sm:col-span-1">
+                            <i class="fas fa-bullseye text-2xl text-gph mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-sm">Berdampak</h4>
+                            <p class="text-xs text-slate-500">Aksi Nyata Pesantren</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Image Presentation -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white group">
+                        <img src="https://github.com/virtueterna28/GPH/blob/main/foto/DSC04162.jpg?raw=true" 
+                             alt="Tentang GPH SMA Ar-Rohmah" 
+                             class="w-full h-[480px] object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                             onerror="this.src='https://placehold.co/600x800/233686/white?text=Foto+GPH'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gph-dark/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <span class="text-xs font-semibold text-amber-300 uppercase tracking-wider">SMA Ar-Rohmah Putra</span>
+                            <h3 class="text-xl font-bold">Semangat Pandu Hidayatullah</h3>
+                        </div>
+                    </div>
+                    <!-- Decorative Badge Background -->
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-400 rounded-full -z-10 blur-xl opacity-60"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-gph rounded-full -z-10 blur-xl opacity-20"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- STRUKTUR KEANGGOTAAN SECTION -->
+    <section id="struktur" class="py-24 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <div class="inline-flex items-center gap-2 text-gph font-bold tracking-wider uppercase text-xs bg-blue-100/60 px-3 py-1.5 rounded-lg">
+                    <i class="fas fa-sitemap"></i> Kabinet & Pengurus
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+                    Struktur Keanggotaan <span class="text-gph">GPH</span>
+                </h2>
+                <p class="text-slate-600 text-base sm:text-lg">
+                    Jajaran pemuda berintegritas yang siap mengabdi dan membawa perubahan positif bagi SMA Ar-Rohmah.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button onclick="filterMembers('all')" class="filter-btn active px-4 py-2 rounded-full text-sm font-semibold transition-all bg-gph text-white shadow-md">Semua</button>
+                <button onclick="filterMembers('bph')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200">Pimpinan Inti</button>
+                <button onclick="filterMembers('kedisiplinan')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200">Kedisiplinan & Peribadatan</button>
+                <button onclick="filterMembers('bahasa')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200">Bahasa</button>
+                <button onclick="filterMembers('humas')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200">Humas</button>
+                <button onclick="filterMembers('lingkungan')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200">Lingkungan</button>
+                <button onclick="filterMembers('pendidikan')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200">Pendidikan & Minat Bakat</button>
+                <button onclick="filterMembers('kreativitas')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200">Wirausaha & Kreativitas</button>
+            </div>
+
+            <!-- Search Box -->
+            <div class="max-w-md mx-auto mb-10 relative">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="search-input" onkeyup="searchMember()" placeholder="Cari nama pengurus atau divisi..." 
+                       class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-gph focus:border-transparent bg-white shadow-sm text-sm">
+            </div>
+
+            <!-- Members Grid -->
+            <div id="members-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Cards render via JS for flexibility and consistency -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-12">
+                <i class="fas fa-user-slash text-4xl text-slate-300 mb-3"></i>
+                <p class="text-slate-500 font-medium">Pengurus tidak ditemukan.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA & CONTACT FOOTER -->
+    <footer id="kontak" class="bg-gph text-white pt-16 pb-8 relative overflow-hidden">
+        <!-- Background Pattern Decor -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-blue-800/80">
+                
+                <!-- Brand & Address -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://github.com/virtueterna28/GPH/blob/main/gph.png?raw=true" 
+                             alt="GPH Logo" 
+                             class="h-14 w-auto bg-white/10 p-1.5 rounded-xl border border-white/20"
+                             onerror="this.src='https://placehold.co/100x100/233686/white?text=GPH'">
+                        <div>
+                            <h3 class="font-extrabold text-xl tracking-wide">Gerakan Pandu Hidayatullah</h3>
+                            <p class="text-xs text-blue-200">SMA Ar-Rohmah Putra Malang</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-blue-100 leading-relaxed pr-4">
+                        Wadah bimbingan dan kepemimpinan santri intra sekolah di Pondok Pesantren Ar-Rohmah Putra. Mengabdi, berinovasi, dan menginspirasi untuk kemajuan bersama.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-amber-300">
+                        <i class="fas fa-location-dot"></i> Kampus SMA Ar-Rohmah Putra Malang, Jawa Timur
+                    </div>
+                </div>
+
+                <!-- Navigation Quick Links -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="text-sm font-bold tracking-wider text-amber-300 uppercase">Navigasi Pintar</h4>
+                    <ul class="space-y-2 text-sm text-blue-100">
+                        <li><a href="#beranda" class="hover:text-white transition-colors"><i class="fas fa-chevron-right text-xs mr-2 text-amber-400"></i>Beranda Utama</a></li>
+                        <li><a href="#tentang" class="hover:text-white transition-colors"><i class="fas fa-chevron-right text-xs mr-2 text-amber-400"></i>Tentang & Filosofi</a></li>
+                        <li><a href="#struktur" class="hover:text-white transition-colors"><i class="fas fa-chevron-right text-xs mr-2 text-amber-400"></i>Struktur Keanggotaan</a></li>
+                        <li><a href="https://www.instagram.com/gphsmaarrohmah/" target="_blank" rel="noopener" class="hover:text-white transition-colors"><i class="fas fa-chevron-right text-xs mr-2 text-amber-400"></i>Instagram Resmi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Official Social Media Card -->
+                <div class="md:col-span-4 space-y-4">
+                    <h4 class="text-sm font-bold tracking-wider text-amber-300 uppercase">Media Sosial Resmi</h4>
+                    <p class="text-xs text-blue-100">Dapatkan informasi berita, agenda acara, dan dokumentasi kegiatan GPH terbaru melalui Instagram kami:</p>
+                    
+                    <!-- Instagram Official Button Card -->
+                    <a href="https://www.instagram.com/gphsmaarrohmah/" target="_blank" rel="noopener" 
+                       class="flex items-center gap-4 bg-white/10 hover:bg-white/20 p-4 rounded-2xl border border-white/20 transition-all group backdrop-blur-sm">
+                        <div class="w-12 h-12 rounded-xl bg-white p-1.5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <img src="https://i.ibb.co.com/SXfnj442/ig.png" 
+                                 alt="Instagram GPH" 
+                                 class="w-full h-full object-contain"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/174/174855.png'">
+                        </div>
+                        <div>
+                            <span class="block text-xs font-medium text-blue-200">Instagram Official</span>
+                            <span class="text-base font-bold text-white group-hover:text-amber-300 transition-colors">@gphsmaarrohmah</span>
+                        </div>
+                        <i class="fas fa-external-link-alt ml-auto text-sm text-amber-400 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-4">
+                <p>&copy; 2026 Gerakan Pandu Hidayatullah (GPH) SMA Ar-Rohmah Putra. Hak Cipta Dilindungi.</p>
+                <div class="flex items-center gap-4">
+                    <a href="#beranda" class="hover:text-amber-300 transition-colors">Kembali ke Atas <i class="fas fa-arrow-up ml-1"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Member Pengurus GPH
+        const membersData = [
+            // BPH / Pimpinan Inti
+            { name: "Attariq Haidar Rasyidin", role: "Ketua Umum", category: "bph", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04170.jpg?raw=true", igName: "@rsydiin_", igLink: "https://www.instagram.com/rsydiin_/" },
+            { name: "Ajisaka Panji Nugroho", role: "Wakil Ketua Umum", category: "bph", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04193.jpg?raw=true", igName: "@panji__nugroho_", igLink: "https://www.instagram.com/panji__nugroho_/" },
+            { name: "Muhandis Alfathihatul Quds", role: "Sekretaris Umum", category: "bph", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04197.jpg?raw=true", igName: "@howndiz", igLink: "https://www.instagram.com/howndiz/" },
+            { name: "Wahyu Nur Arifianto", role: "Bendahara Umum", category: "bph", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04213.jpg?raw=true", igName: "@wahyouuee_", igLink: "https://www.instagram.com/wahyouuee_/" },
+
+            // Kedisiplinan & Peribadatan
+            { name: "Radja Chesta Benisia", role: "Kepala Departemen Kedisiplinan", category: "kedisiplinan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04215.jpg?raw=true", igName: "@radjacebe", igLink: "https://www.instagram.com/radjacebe/" },
+            { name: "Muhammad Alif Muaffaq", role: "Kepala Divisi Keamanan", category: "kedisiplinan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/_MG_9288.jpg?raw=true", igName: "@mu__affaq_", igLink: "https://www.instagram.com/mu__affaq_/" },
+            { name: "Muhammad Zein Yusuf", role: "Kepala Divisi Peribadatan", category: "kedisiplinan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/_MG_9293.jpg?raw=true", igName: "@zennn__0", igLink: "https://www.instagram.com/zennn__0/" },
+            { name: "Muhammad Haidar Faiz", role: "Departemen Kedisiplinan", category: "kedisiplinan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9192.JPG?raw=true", igName: "@haidar.fz_", igLink: "https://www.instagram.com/haidar.fz_/" },
+            { name: "Muhammad Dzaky Ammar", role: "Departemen Kedisiplinan", category: "kedisiplinan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9191.jpg?raw=true", igName: "@dzakmarr", igLink: "https://www.instagram.com/dzakmarr/" },
+            { name: "Muhammad Fatih Radeafala", role: "Departemen Kedisiplinan", category: "kedisiplinan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9196.jpg?raw=true", igName: "@hi.fatihhh", igLink: "https://www.instagram.com/hi.fatihhh/" },
+
+            // Bahasa
+            { name: "Muhammad Dzaki Nafil", role: "Kepala Departemen Bahasa", category: "bahasa", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04256.jpg?raw=true", igName: "@zacknaf_", igLink: "https://www.instagram.com/zacknaf_/" },
+            { name: "Mohammad Shaffa Revolusi Akbar", role: "Kepala Divisi Inggris", category: "bahasa", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9233.jpg?raw=true", igName: "@m.srevolusia", igLink: "https://www.instagram.com/m.srevolusia/" },
+            { name: "Nabil Amru Andhara Hamid", role: "Kepala Divisi Arab", category: "bahasa", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9230.jpg?raw=true", igName: "@nabilamru_", igLink: "https://www.instagram.com/nabilamru_/" },
+            { name: "Dzaky Ghaisan Susanto", role: "Departemen Bahasa", category: "bahasa", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9213.jpg?raw=true", igName: "@dzaky_gss", igLink: "https://www.instagram.com/dzaky_gss/" },
+            { name: "Ghufron Waliyyuddin Saldi", role: "Departemen Bahasa", category: "bahasa", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9235.jpg?raw=true", igName: "@ghuf_fong", igLink: "https://www.instagram.com/ghuf_fong/" },
+            { name: "Muhammad Isyan Aryasatya", role: "Departemen Bahasa", category: "bahasa", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9212.jpg?raw=true", igName: "@isyanzzz_", igLink: "https://www.instagram.com/isyanzzz_/" },
+
+            // Humas
+            { name: "Liwa El Nashr Mubarok", role: "Kepala Departemen Humas", category: "humas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04249.jpg?raw=true", igName: "@liwaael_", igLink: "https://www.instagram.com/liwaael_/" },
+            { name: "Daris Irsyad Fachri A", role: "Departemen Humas", category: "humas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9190.jpg?raw=true", igName: "@darsirsyd_", igLink: "https://www.instagram.com/darsirsyd_/" },
+            { name: "Arka Asyraf Rasyadan", role: "Departemen Humas", category: "humas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9175.jpg?raw=true", igName: "arkasyraf", igLink: "https://www.instagram.com/arkasyraf/" },
+            { name: "Athalah Hasan Al Ghifari", role: "Departemen Humas", category: "humas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9176.jpg?raw=true", igName: "@athalahhsann__", igLink: "https://www.instagram.com/athalahhsann__/" },
+
+            // Lingkungan
+            { name: "Ahmad Althaf Rabbani", role: "Kepala Departemen Lingkungan", category: "lingkungan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04227.jpg?raw=true", igName: "@topaltop14", igLink: "https://www.instagram.com/topaltop14/" },
+            { name: "Ravi Kusuma Wardana", role: "Departemen Lingkungan", category: "lingkungan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9210.jpg?raw=true", igName: "@ravikusumawardana", igLink: "https://www.instagram.com/ravikusumawardana/" },
+            { name: "Azzam Tsaqib Junaed", role: "Departemen Lingkungan", category: "lingkungan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9208.jpg?raw=true", igName: "@azzamj._", igLink: "https://www.instagram.com/azzamj._/" },
+            { name: "Rasya Ibrahim Syahputra", role: "Departemen Lingkungan", category: "lingkungan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9203.jpg?raw=true", igName: "@baimm_.s", igLink: "https://www.instagram.com/baimm_.s/" },
+
+            // Pendidikan & Minat Bakat
+            { name: "Achmad Abdul Fattah", role: "Kepala Departemen Minat Bakat", category: "pendidikan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/DSC04243.jpg?raw=true", igName: "@alfathfattah940", igLink: "https://www.instagram.com/alfathfattah940/" },
+            { name: "Ahmad Irsyad Taqiy", role: "Kepala Divisi Pendidikan", category: "pendidikan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9269.jpg?raw=true", igName: "@irsyadtaqiy_", igLink: "https://www.instagram.com/irsyadtaqiy_/" },
+            { name: "Ilham Bintang Yuar", role: "Anggota Pendidikan", category: "pendidikan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9243.jpg?raw=true", igName: "@bintangyuarrrr", igLink: "https://www.instagram.com/bintangyuarrrr/" },
+            { name: "Miqdad Akrami Azra", role: "Anggota Pendidikan", category: "pendidikan", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9239.jpg?raw=true", igName: "@akramiazra", igLink: "https://www.instagram.com/akramiazra/" },
+
+            // Wirausaha & Kreativitas
+            { name: "Alfarabi Ibnu Biyansyah", role: "Kepala Divisi Wirausaha", category: "kreativitas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/_MG_9301.jpg?raw=true", igName: "@biyansyahh__", igLink: "https://www.instagram.com/biyansyahh__/" },
+            { name: "Hafizh Nur Raihan", role: "Anggota Wirausaha", category: "kreativitas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9259.jpg?raw=true", igName: "@_nurraihan12", igLink: "https://www.instagram.com/_nurraihan12/" },
+            { name: "Nur Habibie Yusuf Ibrahim", role: "Kepala Divisi Kreativitas", category: "kreativitas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9282.jpg?raw=true", igName: "@habibieeibrahim", igLink: "https://www.instagram.com/habibieeibrahim/" },
+            { name: "Abiyyu Dhafran Ansori", role: "Anggota Kreativitas", category: "kreativitas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9261.jpg?raw=true", igName: "@biyu.dhfrn", igLink: "https://www.instagram.com/biyu.dhfrn/" },
+            { name: "Haikal Ilham Akbar", role: "Anggota Kreativitas", category: "kreativitas", photo: "https://github.com/virtueterna28/GPH/blob/main/foto/IMG_9266.jpg?raw=true", igName: "@aspiring.physiotherapist", igLink: "https://www.instagram.com/aspiring.physiotherapist/" }
+        ];
+
+        let currentCategory = 'all';
+
+        // Render Members Cards
+        function renderMembers(data) {
+            const grid = document.getElementById('members-grid');
+            const emptyState = document.getElementById('empty-state');
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            data.forEach(member => {
+                const isLeader = member.role.includes("Ketua") || member.role.includes("Kepala");
+                const badgeColor = isLeader ? "bg-amber-100 text-amber-800 border-amber-200" : "bg-blue-50 text-gph border-blue-100";
+
+                const cardHTML = `
+                    <div class="member-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm flex flex-col justify-between group">
+                        <div class="relative overflow-hidden bg-slate-100 h-72">
+                            <img src="${member.photo}" 
+                                 alt="${member.name}" 
+                                 class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/400x500/233686/white?text=${encodeURIComponent(member.name)}'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <a href="${member.igLink}" target="_blank" rel="noopener" class="w-full py-2 bg-white text-gph font-bold text-xs rounded-xl shadow text-center flex items-center justify-center gap-2 hover:bg-amber-300 hover:text-slate-900 transition-colors">
+                                    <i class="fab fa-instagram text-sm"></i> Ikuti ${member.igName}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3 flex-1 flex flex-col justify-between bg-white">
+                            <div>
+                                <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border ${badgeColor} mb-2">
+                                    ${member.role}
+                                </span>
+                                <h3 class="font-bold text-slate-900 text-base line-clamp-1 group-hover:text-gph transition-colors" title="${member.name}">
+                                    ${member.name}
+                                </h3>
+                            </div>
+                            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                                <a href="${member.igLink}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-gph font-medium transition-colors">
+                                    <i class="fab fa-instagram text-amber-500"></i>
+                                    <span>${member.igName}</span>
+                                </a>
+                                <span class="text-[10px] text-slate-400 font-semibold uppercase">${member.category}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+
+        // Filter Functionality
+        function filterMembers(category) {
+            currentCategory = category;
+            
+            // Update Active Class Buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-gph', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+
+            event.target.classList.remove('bg-white', 'text-slate-700');
+            event.target.classList.add('bg-gph', 'text-white', 'shadow-md');
+
+            // Reset search input
+            document.getElementById('search-input').value = '';
+
+            if (category === 'all') {
+                renderMembers(membersData);
+            } else {
+                const filtered = membersData.filter(m => m.category === category);
+                renderMembers(filtered);
+            }
+        }
+
+        // Search Functionality
+        function searchMember() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            let baseList = currentCategory === 'all' 
+                ? membersData 
+                : membersData.filter(m => m.category === currentCategory);
+
+            const filtered = baseList.filter(m => 
+                m.name.toLowerCase().includes(query) || 
+                m.role.toLowerCase().includes(query) || 
+                m.igName.toLowerCase().includes(query)
+            );
+
+            renderMembers(filtered);
+        }
+
+        // HERO CAROUSEL SLIDER LOGIC
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('#hero-slider .slide');
+        const dots = document.querySelectorAll('.dot-btn');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.remove('opacity-0');
+                    slide.classList.add('opacity-100');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0');
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-white/50', 'opacity-50');
+                    dot.classList.add('bg-white', 'opacity-100', 'w-8');
+                } else {
+                    dot.classList.remove('bg-white', 'opacity-100', 'w-8');
+                    dot.classList.add('bg-white/50', 'opacity-50', 'w-3');
+                }
+            });
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(prev);
+        }
+
+        function setSlide(index) {
+            showSlide(index);
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            }
+        });
+
+        // Close mobile menu on clicking nav link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Initialize Page
+        window.onload = function() {
+            renderMembers(membersData);
+            showSlide(0);
+            startAutoSlide();
+        };
+    </script>
+</body>
+</html>
