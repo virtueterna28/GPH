@@ -1,0 +1,142 @@
+/* Gaya tambahan situs GPH: nuansa kerajaan biru tua dan emas */
+:root {
+  --royal-navy: #101b49;
+  --royal-blue: #233686;
+  --royal-gold: #f4c542;
+  --royal-gold-light: #ffe79a;
+  --royal-silver: #d4d9e2;
+  --royal-ink: #17213f;
+}
+
+body {
+  min-height: 100vh;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(145deg, #101b49 0%, #233686 48%, #c8911d 100%);
+  background-attachment: fixed;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #e7eaf2; }
+::-webkit-scrollbar-thumb { background: var(--royal-blue); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--royal-navy); }
+
+/* Carousel and card interactions */
+.slide-fade { transition: opacity 1s ease-in-out; }
+.member-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.member-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -10px rgba(16, 27, 73, 0.38);
+}
+.glass-header { background: rgba(16, 27, 73, 0.94); backdrop-filter: blur(12px); }
+.glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+
+/* Tema kerajaan aktif secara default */
+.royal-mode .bg-white {
+  background: linear-gradient(145deg, #d9dfeb 0%, #bfc9dc 48%, #e8d28c 100%);
+}
+
+.royal-mode #tentang,
+.royal-mode #struktur {
+  background: linear-gradient(135deg, #101b49 0%, #1b2c69 58%, #273b7b 100%);
+  color: #fff;
+}
+
+.royal-mode #tentang h2,
+.royal-mode #struktur h2,
+.royal-mode #tentang h3,
+.royal-mode #struktur h3,
+.royal-mode #tentang h4 {
+  color: #fff;
+}
+
+.royal-mode #tentang p:not(.text-amber-300),
+.royal-mode #struktur p {
+  color: #e3e9ff;
+}
+
+.royal-mode #tentang .bg-slate-50,
+.royal-mode #tentang .bg-white,
+.royal-mode #struktur .member-card,
+.royal-mode #struktur .member-card .bg-white,
+.royal-mode #struktur #search-input,
+.royal-mode #struktur .filter-btn:not(.bg-gph) {
+  background: linear-gradient(145deg, #d9dfeb 0%, #bfc9dc 48%, #e8d28c 100%);
+  color: var(--royal-ink);
+  border-color: rgba(244, 197, 66, 0.7);
+}
+
+.royal-mode #struktur .member-card .bg-slate-100 {
+  background: linear-gradient(145deg, #c5cede, #e0d39f);
+}
+
+.royal-mode #struktur .member-card h3 { color: var(--royal-navy); }
+.royal-mode #struktur .member-card p,
+.royal-mode #struktur .member-card span { color: #394260; }
+.royal-mode #struktur .member-card .bg-blue-50 { color: var(--royal-blue); }
+
+ .royal-mode #tentang .bg-gph-soft {
+  background: linear-gradient(120deg, rgba(244, 197, 66, 0.18), rgba(255, 231, 154, 0.1));
+  color: #fff;
+}
+
+/* Highlights Grid: dark text stays readable on the light royal gradient cards */
+.royal-mode #tentang .grid.grid-cols-2 > div h4,
+.royal-mode #tentang .grid.grid-cols-2 > div p {
+  color: var(--royal-ink);
+}
+.royal-mode #tentang .grid.grid-cols-2 > div i {
+  color: var(--royal-blue);
+}
+
+
+.royal-mode #empty-state p { color: #fff; }
+.royal-mode .filter-btn.active,
+.royal-mode .filter-btn.bg-gph {
+  background: linear-gradient(135deg, #f4c542, #ffe79a);
+  color: #101b49;
+  border-color: #f4c542;
+}
+
+/* Mahkota mengaktifkan/nonaktifkan seluruh tema kerajaan */
+.crown-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 60;
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  place-items: center;
+  border: 2px solid #fff1b8;
+  border-radius: 9999px;
+  background: linear-gradient(145deg, #ffe79a, #e5aa22);
+  color: #101b49;
+  font-size: 1.35rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.crown-toggle:hover { transform: translateY(-3px) rotate(-8deg); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38); }
+.crown-toggle:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+
+/* Saat tema kerajaan dimatikan, kembali ke tampilan terang */
+body:not(.royal-mode) {
+  background: #f8fafc;
+}
+body:not(.royal-mode) #tentang { background: #fff; color: #1e293b; }
+body:not(.royal-mode) #struktur { background: #f8fafc; color: #1e293b; }
+body:not(.royal-mode) #tentang h2,
+body:not(.royal-mode) #tentang h3,
+body:not(.royal-mode) #tentang h4,
+body:not(.royal-mode) #struktur h2,
+body:not(.royal-mode) #struktur h3 { color: #0f172a; }
+body:not(.royal-mode) #tentang p:not(.text-amber-300),
+body:not(.royal-mode) #struktur p { color: #475569; }
+body:not(.royal-mode) #empty-state p { color: #64748b; }
+body:not(.royal-mode) .crown-toggle { background: var(--royal-blue); color: #ffe79a; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
